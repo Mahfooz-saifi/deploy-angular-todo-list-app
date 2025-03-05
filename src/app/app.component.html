@@ -1,0 +1,68 @@
+<div class="container mt-3">
+  <h1 class="text-center mb-3">To-Do List App</h1>
+  <hr>
+  <div class="row">
+    <!-- Task template Form -->
+    <form (ngSubmit)="addTask()" class="w-100">
+      <div class="row g-3">  <!-- Added gutter spacing -->
+        <!-- Filter buttons -->
+        <div class="col-12 col-md-3">
+          <div class="d-flex flex-column flex-md-row gap-2 mb-3">
+            <button (click)="filter = 'All'" [class.active]="filter === 'All'" 
+                    class="btn btn-info flex-fill text-nowrap">All</button>
+            <button (click)="filter = 'Active'" [class.active]="filter === 'Active'" 
+                    class="btn btn-info flex-fill text-nowrap">Active</button>
+            <button (click)="filter = 'Completed'" [class.active]="filter === 'Completed'" 
+                    class="btn btn-info flex-fill text-nowrap">Completed</button>
+          </div>
+        </div>
+
+        <!-- Input fields -->
+        <div class="col-12 col-md-9">
+          <div class="row g-2">
+            <div class="col-12 col-md-5">
+              <input type="text" class="form-control"
+                     [(ngModel)]="taskName" name="taskName"
+                     placeholder="please Enter your task name" required>
+            </div>
+            <div class="col-12 col-md-5">
+              <input type="text" class="form-control"
+                     [(ngModel)]="taskImageUrl" name="taskImageUrl"
+                     placeholder="Image URL (optional)">
+            </div>
+            <div class="col-12 col-md-2">
+              <button class="btn btn-primary w-100" type="submit">Add Task</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Task List -->
+    <div class="col-12">
+      <ul class="list-group">
+        <li *ngFor="let task of filteredTasks()" 
+            class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+          <div class="mb-2 mb-md-0">
+            <span [class.text-decoration-line-through]="task.completed">{{ task.name }}</span>
+            <div *ngIf="task.imageUrl" class="mt-2">
+              <img [src]="task.imageUrl" alt="Task Image" class="img-fluid" style="max-width: 80px">
+            </div>
+          </div>
+          
+          <div class="d-flex flex-column flex-md-row gap-2">
+            <button *ngIf="check" (click)="taskCompletion(task)" 
+                    class="btn btn-success btn-sm text-nowrap">
+              <input type="checkbox" class="form-check-input me-1">
+              {{ task.completed ? 'Undo' : 'Complete' }}
+            </button>
+            <button (click)="deleteTask(task)" 
+                    class="btn btn-danger btn-sm text-nowrap">
+              <i class="fa fa-trash-o me-1"></i>Delete
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

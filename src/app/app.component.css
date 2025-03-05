@@ -1,0 +1,34 @@
+input {
+    margin-right: 5px;
+}
+
+.form-listing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.todo-listing{
+    margin: auto;
+}
+
+button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+button:disabled {
+    background-color: #ccc;
+}
+
+.text-decoration-line-through {
+    text-decoration: line-through;
+}
+
+img {
+    border-radius: 50%;
+}
+@media (max-width: 768px) {
+    .form-check-input {
+      margin-top: 0.3rem;
+    }
+  }
